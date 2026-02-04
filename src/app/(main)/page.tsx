@@ -35,8 +35,9 @@ type Selection =
   | { type: "column"; index: number }
   | null;
 
-function parseCsv(raw: string): string[][] {
+function parseDelimited(raw: string): string[][] {
   if (!raw.trim()) return [];
+  const delimiter = raw.includes("\t") ? "\t" : ",";
   const rows: string[][] = [];
   let current: string[] = [];
   let cell = "";
@@ -53,7 +54,7 @@ function parseCsv(raw: string): string[][] {
       }
       continue;
     }
-    if (char === "," && !inQuotes) {
+    if (char === delimiter && !inQuotes) {
       current.push(cell);
       cell = "";
       continue;
@@ -95,7 +96,7 @@ export default function Home() {
   const [selection, setSelection] = useState<Selection>(null);
   const [copyStatus, setCopyStatus] = useState("");
 
-  const parsed = useMemo(() => parseCsv(csvText), [csvText]);
+  const parsed = useMemo(() => parseDelimited(csvText), [csvText]);
   const columnCount = parsed.reduce(
     (max, row) => Math.max(max, row.length),
     0,
