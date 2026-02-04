@@ -5,6 +5,7 @@ import {
   appShell,
   card,
   chip,
+  cornerHeaderCell,
   controlRow,
   csvArea,
   grid,
@@ -13,6 +14,8 @@ import {
   heroCaption,
   heroTitle,
   infoChip,
+  fileButton,
+  fileInput,
   input,
   label,
   panel,
@@ -140,17 +143,6 @@ export default function Home() {
 
   return (
     <div className={appShell} data-testid="app-shell">
-      <header className={header}>
-        <div className={hero}>
-          <p className={heroCaption}>CSV Inspector</p>
-          <h1 className={heroTitle}>CSVを即座にテーブル化して配列化</h1>
-        </div>
-        <p>
-          CSVテキストやCSVファイルを読み込み、任意の行・列をJavaScript配列と
-          PostgreSQL配列形式でコピーできます。
-        </p>
-      </header>
-
       <section className={grid}>
         <div className={card} data-testid="csv-card">
           <h2 className={sectionTitle}>CSV入力</h2>
@@ -158,7 +150,7 @@ export default function Home() {
             <label className={label}>
               CSVファイル
               <input
-                className={input}
+                className={fileInput}
                 type="file"
                 accept=".csv,text/csv"
                 onChange={async (event) => {
@@ -169,6 +161,7 @@ export default function Home() {
                   setSelection(null);
                 }}
               />
+              <span className={fileButton}>ファイルを選択</span>
             </label>
             <label className={toggleLabel}>
               ヘッダー
@@ -248,7 +241,7 @@ export default function Home() {
             style={{ "--table-column-count": columnCount } as React.CSSProperties}
           >
             <div className={tableRow}>
-              <div className={rowHeaderCell}></div>
+              <div className={`${rowHeaderCell} ${cornerHeaderCell}`}></div>
               {headers.map((value, index) => (
                 <button
                   type="button"
@@ -299,6 +292,17 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <header className={header}>
+        <div className={hero}>
+          <p className={heroCaption}>CSV Inspector</p>
+          <h1 className={heroTitle}>CSVを即座にテーブル化して配列化</h1>
+        </div>
+        <p>
+          CSVテキストやCSVファイルを読み込み、任意の行・列をJavaScript配列と
+          PostgreSQL配列形式でコピーできます。
+        </p>
+      </header>
     </div>
   );
 }
