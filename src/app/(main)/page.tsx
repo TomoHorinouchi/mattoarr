@@ -18,14 +18,22 @@ import {
   panel,
   rowHeaderCell,
   sectionTitle,
-  select,
   selectedCell,
+  selectionChip,
   table,
   tableMeta,
   tableCell,
   tableHeaderCell,
   tableRow,
+  toggleInput,
+  toggleLabel,
+  toggleOn,
+  toggleRow,
+  toggleThumb,
+  toggleThumbOn,
+  toggleTrack,
   toolbar,
+  toolbarActions,
   toolbarGroup,
   toolbarTitle,
 } from "./style.css";
@@ -162,19 +170,26 @@ export default function Home() {
                 }}
               />
             </label>
-            <label className={label}>
+            <label className={toggleLabel}>
               ヘッダー
-              <select
-                className={select}
-                value={hasHeader ? "yes" : "no"}
-                onChange={(event) => {
-                  setHasHeader(event.target.value === "yes");
-                  setSelection(null);
-                }}
-              >
-                <option value="yes">あり</option>
-                <option value="no">なし</option>
-              </select>
+              <span className={toggleRow}>
+                <input
+                  className={toggleInput}
+                  type="checkbox"
+                  role="switch"
+                  checked={hasHeader}
+                  onChange={(event) => {
+                    setHasHeader(event.target.checked);
+                    setSelection(null);
+                  }}
+                />
+                <span className={`${toggleTrack} ${hasHeader ? toggleOn : ""}`}>
+                  <span
+                    className={`${toggleThumb} ${hasHeader ? toggleThumbOn : ""}`}
+                  />
+                </span>
+                <span>{hasHeader ? "あり" : "なし"}</span>
+              </span>
             </label>
           </div>
           <textarea
@@ -194,7 +209,7 @@ export default function Home() {
             <div className={toolbarGroup}>
               <h2 className={toolbarTitle}>配列コピー</h2>
               {selection ? (
-                <span className={chip}>
+                <span className={`${chip} ${selectionChip}`}>
                   {selection.type === "row"
                     ? `Row ${selection.index + 1}`
                     : `Col ${headers[selection.index] ?? selection.index + 1}`}
@@ -203,7 +218,7 @@ export default function Home() {
                 <span className={chip}>行・列を選択</span>
               )}
             </div>
-            <div className={toolbarGroup}>
+            <div className={toolbarActions}>
               <button
                 type="button"
                 className={chip}

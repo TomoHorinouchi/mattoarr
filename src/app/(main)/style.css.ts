@@ -76,9 +76,12 @@ export const sectionTitle = style({
 });
 
 export const controlRow = style({
-  display: "flex",
-  flexWrap: "wrap",
+  display: "grid",
+  gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1fr)",
   gap: "16px",
+  alignItems: "end",
+  overflowX: "auto",
+  paddingBottom: "4px",
 });
 
 export const label = style({
@@ -105,6 +108,61 @@ export const select = style({
   background: "#fff",
 });
 
+export const toggleLabel = style({
+  display: "grid",
+  gap: "8px",
+  fontSize: "13px",
+  fontWeight: 600,
+  color: "#1f2937",
+  justifySelf: "end",
+});
+
+export const toggleRow = style({
+  display: "flex",
+  alignItems: "center",
+  gap: "12px",
+  whiteSpace: "nowrap",
+});
+
+export const toggleInput = style({
+  position: "absolute",
+  opacity: 0,
+  width: 1,
+  height: 1,
+});
+
+export const toggleTrack = style({
+  position: "relative",
+  width: "44px",
+  height: "26px",
+  borderRadius: "999px",
+  background: "rgba(148, 163, 184, 0.45)",
+  border: "1px solid rgba(148, 163, 184, 0.7)",
+  transition: "background 0.2s ease, border-color 0.2s ease",
+  flexShrink: 0,
+});
+
+export const toggleThumb = style({
+  position: "absolute",
+  top: "3px",
+  left: "3px",
+  width: "18px",
+  height: "18px",
+  borderRadius: "999px",
+  background: "#ffffff",
+  boxShadow: "0 6px 12px rgba(15, 23, 42, 0.18)",
+  transition: "transform 0.2s ease",
+});
+
+export const toggleOn = style({
+  background: "#0f172a",
+  borderColor: "#0f172a",
+});
+
+export const toggleThumbOn = style({
+  transform: "translateX(18px)",
+});
+
 export const csvArea = style({
   width: "100%",
   minHeight: "240px",
@@ -118,23 +176,33 @@ export const csvArea = style({
 });
 
 export const toolbar = style({
-  display: "flex",
-  flexWrap: "wrap",
+  display: "grid",
+  gridTemplateColumns: "minmax(0, 1fr) auto",
   alignItems: "center",
-  justifyContent: "space-between",
   gap: "12px",
 });
 
 export const toolbarGroup = style({
   display: "flex",
-  flexWrap: "wrap",
+  flexWrap: "nowrap",
   alignItems: "center",
   gap: "10px",
+  minWidth: 0,
+});
+
+export const toolbarActions = style({
+  display: "flex",
+  flexWrap: "nowrap",
+  alignItems: "center",
+  gap: "10px",
+  flexShrink: 0,
+  whiteSpace: "nowrap",
 });
 
 export const toolbarTitle = style({
   fontSize: "18px",
   fontWeight: 600,
+  whiteSpace: "nowrap",
 });
 
 export const tableMeta = style({
@@ -161,6 +229,15 @@ export const chip = style({
       cursor: "not-allowed",
     },
   },
+});
+
+export const selectionChip = style({
+  flex: "1 1 auto",
+  minWidth: 0,
+  maxWidth: "100%",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
 });
 
 export const infoChip = style({
